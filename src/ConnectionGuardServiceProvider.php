@@ -2,6 +2,7 @@
 
 namespace Elielelie\ConnectionGuard;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class ConnectionGuardServiceProvider extends ServiceProvider
@@ -36,5 +37,10 @@ class ConnectionGuardServiceProvider extends ServiceProvider
         $this->app->extend('db', function ($db, $app) {
             return new ConnectionGuardDatabaseManager($app, $app['db.factory']);
         });
+
+        if (class_exists(Model::class)) {
+            Model::setConnectionResolver($this->app['db']);
+        }
     }
 }
+

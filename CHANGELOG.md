@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-06-28
+
+### Fixed
+
+- **Eloquent Model Bypass**: Guards were not enforced on Eloquent ORM operations (`create()`, `save()`, `update()`, `delete()`). During Laravel's bootstrap, the framework binds the original `DatabaseManager` as the static connection resolver for all Eloquent models. When the package replaced the `'db'` service via `extend()`, the static `Model::$resolver` retained a reference to the original unguarded instance. The `ConnectionGuardServiceProvider` now explicitly re-binds the Eloquent resolver after extending the database manager.
+
+### Added
+
+- Dedicated Eloquent guard test suite (`EloquentGuardTest.php`) covering create, save, update, delete, select, `withoutGuards()`, and `except_tables` scenarios through the Eloquent ORM.
+
 ## [0.1.0] - 2026-06-27
 
 ### Added
