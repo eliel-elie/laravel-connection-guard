@@ -43,6 +43,19 @@
         "pestphp/pest": "^2.0 || ^3.0",
         "pestphp/pest-plugin-laravel": "^2.0 || ^3.0"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Elielelie\\ConnectionGuard\\ConnectionGuardServiceProvider"
+            ],
+            "aliases": {
+                "ConnectionGuard": "Elielelie\\ConnectionGuard\\\\Facades\\ConnectionGuard"
+            }
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest"
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
